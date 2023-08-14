@@ -18,14 +18,16 @@ public class Banco {
     private List<Conta> contas = new ArrayList<>();
 
     public void adicionarConta(Conta conta) {
-        contas.add(conta);
+        if(conta != null) {
+            contas.add(conta);
+        }
     }
+
     public Conta pesquisarContaDoCliente(String cpf) {
         Conta c = null;
-        for (int i = 0; i < contas.size(); i++) {
-            if (contas.get(i).getCpf().equals(cpf)) {
-                c = contas.get(i);
-            }
+        
+        if(cpf != null) {
+            c = listarContasPorCpf(cpf);
         }
         return c;
     }
@@ -34,7 +36,15 @@ public class Banco {
         return filtrarContas(c -> c.getSaldo() >= 10000);
     }
 
+    public Conta listarContasPorCpf(String cpf) {
+        return filtrarContas(c -> c.getCpf().equals(cpf)).get(0);
+    }
+
     private List<Conta> filtrarContas(Predicate<Conta> filtro) {
         return contas.stream().filter(filtro).collect(Collectors.toList());
+    }
+
+    public int qtdContasCadastradas() {
+        return contas.size();
     }
 }

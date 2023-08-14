@@ -6,13 +6,16 @@ import org.junit.jupiter.api.Test;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class CaminhoArquivoTest {
 
     @Test
-    @Disabled
+    //@Disabled
     public void deve_montar_caminho_para_arquivo() {
+
+        assertThrows(IllegalArgumentException.class, () -> CaminhoArquivo.getInstance(null));
 
         CaminhoArquivo caminhoArquivo = CaminhoArquivo.getInstance(1);
         assertEquals(Paths.get("/tmp/1"), caminhoArquivo.getDiretorio());

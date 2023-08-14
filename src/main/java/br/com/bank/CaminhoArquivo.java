@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 
 public class CaminhoArquivo {
 
-
     private Path diretorio;
 
     private Path arquivo;
@@ -28,22 +27,21 @@ public class CaminhoArquivo {
 
     public static CaminhoArquivo getInstance(Integer id) {
         String b = "/tmp/";
-        String d = null;
-        if (id <= 1000) {
-            d = b + id;
-        } else {
-            int i = id;
-            boolean f = true;
-            while (f) {
-                if (id <= (i * 1000)) {
-                    d = b + i;
-                    f = false;
-                }
-                i++;
-            }
-        }
-        return new CaminhoArquivo(Paths.get(d), Paths.get(d));
+        String d, a = null;
 
+        if(id == null) {
+            throw new IllegalArgumentException();
+        }
+
+        if (id <= 1000) {
+            d = b + "1";
+        } else {
+            int i = (id - 1) / 1000 + 1;
+            d = b + i;
+        }
+        a = d + "/" + id;
+
+        return new CaminhoArquivo(Paths.get(d), Paths.get(a));
     }
 
 }
