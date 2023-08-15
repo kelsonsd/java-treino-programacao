@@ -11,9 +11,6 @@ public interface AlunoRepository extends CrudRepository<Aluno, Integer> {
     //find, list, save, update e delete
 
     public Aluno findById(int id);
-    //public List<Aluno> list();
-    //public void save();
-    //public void update();
    
     
 }
