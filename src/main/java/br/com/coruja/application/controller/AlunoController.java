@@ -21,9 +21,6 @@ public class AlunoController {
     @Autowired
     private AlunoRepository alunoRepository;
 
-    @Autowired
-    private AlunoService alunoService;
-
     //find deve buscar por um aluno específico recebendo o ID no path param - GET
     //retornar 200 como status code
     @GetMapping("/aluno/find/{id}")
@@ -40,21 +37,21 @@ public class AlunoController {
 
     //save deve salvar um novo aluno - POST
     //retornar 201 como status code
-    @PostMapping("/aluno/save")
-    public ResponseEntity<?> save(@RequestBody Aluno aluno) {
-        return alunoService.save(aluno);
+    @PostMapping("/aluno")
+    public ResponseEntity<?> cadastrar(@RequestBody Aluno aluno) {
+        return new ResponseEntity<>(alunoRepository.save(aluno), HttpStatus.CREATED);
     }
 
     //put deve atualizar todos os atributos de um aluno recebendo o ID no path param - PUT
     //retornar 200 como status code
-    @PutMapping("/aluno/update")
+    @PutMapping("/aluno/{id}")
     public ResponseEntity<?> update(@RequestBody Aluno aluno) {
         return new ResponseEntity<>(alunoRepository.save(aluno), HttpStatus.OK);
     }
 
     //delete deve remover um aluno - DELETE
     //retornar 200 como status code
-    @DeleteMapping("/aluno/delete/{id}")
+    @DeleteMapping("/aluno/{id}")
     public ResponseEntity<?> delete(@PathVariable int id) {
         Aluno a = alunoRepository.findById(id);
         alunoRepository.delete(a);

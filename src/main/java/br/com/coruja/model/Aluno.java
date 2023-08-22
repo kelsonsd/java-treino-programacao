@@ -1,5 +1,7 @@
 package br.com.coruja.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "aluno", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
+//@Table(name = "aluno", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
 public class Aluno {
     
     @Id
@@ -21,10 +23,17 @@ public class Aluno {
     @Column
     @NotNull
     private String nome;
-    @Column
     private String email;
 
-    public long getId() {
+    public Aluno() {
+        
+    }
+
+    public Aluno(String nome) {
+        this.nome = nome;
+    }
+
+    public int getId() {
         return id;
     }
     public void setId(int id) {
